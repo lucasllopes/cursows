@@ -1,6 +1,7 @@
 package com.lucas.cursows.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,8 @@ public class Usuario implements Serializable   {
 	private String email;
 	private String telefone;
 	private String senha;	
+	
+	private List<Pedido> 
 	
 	public Usuario() {
 		

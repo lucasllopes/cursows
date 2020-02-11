@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.lucas.cursows.entities.Pedido;
 import com.lucas.cursows.entities.Usuario;
+import com.lucas.cursows.entities.enums.StatusPedido;
 import com.lucas.cursows.repositories.PedidoRepository;
 import com.lucas.cursows.repositories.UsuarioRepository;
 
@@ -31,9 +32,9 @@ public class TesteConfig implements CommandLineRunner {
 		
 		usuarioRepository.saveAll(Arrays.asList(u1,u2));
 		
-		Pedido o1 = new Pedido(0l, Instant.parse("2019-06-20T19:53:07Z"), u1);
-		Pedido o2 = new Pedido(0l, Instant.parse("2019-07-21T03:42:10Z"), u2);
-		Pedido o3 = new Pedido(0l, Instant.parse("2019-07-22T15:21:22Z"), u1);
+		Pedido o1 = new Pedido(0l, Instant.parse("2019-06-20T19:53:07Z"),StatusPedido.PAGO, u1);
+		Pedido o2 = new Pedido(0l, Instant.parse("2019-07-21T03:42:10Z"),StatusPedido.AGUARDANDO_PAGAMENTO, u2);
+		Pedido o3 = new Pedido(0l, Instant.parse("2019-07-22T15:21:22Z"),StatusPedido.AGUARDANDO_PAGAMENTO, u1);
 		
 		pedidoRepository.saveAll(Arrays.asList(o1,o2,o3));
 	}

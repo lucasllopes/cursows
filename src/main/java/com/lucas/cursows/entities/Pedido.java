@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.lucas.cursows.entities.enums.StatusPedido;
 
 @Entity
 public class Pedido implements Serializable {
@@ -25,18 +26,23 @@ public class Pedido implements Serializable {
 	@JsonFormat(shape = Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
 	private Instant momentoPedido;
 	
+	private Integer statusPedido;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
 	private Usuario cliente;
+	
+	
 	
 	public Pedido() {
 		
 	}
 
-	public Pedido(Long id, Instant momentoPedido, Usuario cliente) {
+	public Pedido(Long id, Instant momentoPedido, StatusPedido statusPedido, Usuario cliente) {
 
 		this.id = id;
 		this.momentoPedido = momentoPedido;
+		setStatusPedido(statusPedido);	
 		this.cliente = cliente;
 	}
 
@@ -54,6 +60,19 @@ public class Pedido implements Serializable {
 
 	public void setMomentoPedido(Instant momentoPedido) {
 		this.momentoPedido = momentoPedido;
+	}	
+
+	public StatusPedido getStatusPedido() {
+		return StatusPedido.valueOf(statusPedido);
+	}
+
+	public void setStatusPedido(StatusPedido statusPedido) {
+		if(statusPedido != null) {
+		this.statusPedido = statusPedido.getCodigo();
+		}
+		else {
+			throw new NullPointerException("statuspedido não pode ser nulo");
+		}
 	}
 
 	public Usuario getCliente() {

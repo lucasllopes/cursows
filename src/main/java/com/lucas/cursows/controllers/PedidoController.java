@@ -9,32 +9,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lucas.cursows.entities.Pedido;
 import com.lucas.cursows.entities.Usuario;
+import com.lucas.cursows.services.PedidoService;
 import com.lucas.cursows.services.UsuarioService;
 
 @RestController
-@RequestMapping(value = "/usuarios")
-public class UsuarioController { 
+@RequestMapping(value = "/pedidos")
+public class PedidoController {
 	
 	@Autowired
-	private UsuarioService usuarioService;
+	private PedidoService pedidoService;
 	
 	@GetMapping
-	public ResponseEntity<List<Usuario>> buscarTodos(){
+	public ResponseEntity<List<Pedido>> buscarTodos(){
 
-		List<Usuario> listaUsuarios = usuarioService.buscarTodos();
+		List<Pedido> listaPedidos = pedidoService.buscarTodos();
 		
-		return ResponseEntity.ok().body(listaUsuarios);		
+		return ResponseEntity.ok().body(listaPedidos);		
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id){
-		Usuario user = usuarioService.buscarPorId(id);
+	public ResponseEntity<Pedido> buscarPorId(@PathVariable Long id){
+		Pedido user = pedidoService.buscarPorId(id);
 		
 		return ResponseEntity.ok(user);
 	}
-	
-	
 	
 
 }

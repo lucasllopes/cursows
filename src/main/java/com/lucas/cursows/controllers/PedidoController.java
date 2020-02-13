@@ -21,7 +21,7 @@ public class PedidoController {
 	@Autowired
 	private PedidoService pedidoService;
 	
-	@GetMapping
+	@GetMapping(value = "/buscarTodos")
 	public ResponseEntity<List<Pedido>> buscarTodos(){
 
 		List<Pedido> listaPedidos = pedidoService.buscarTodos();
@@ -29,7 +29,7 @@ public class PedidoController {
 		return ResponseEntity.ok().body(listaPedidos);		
 	}
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/buscarPorId/{id}")
 	public ResponseEntity<Pedido> buscarPorId(@PathVariable Long id){
 		Pedido user = pedidoService.buscarPorId(id);
 		

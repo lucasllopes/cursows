@@ -2,15 +2,18 @@ package com.lucas.cursows.config;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Locale.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.lucas.cursows.entities.Categoria;
 import com.lucas.cursows.entities.Pedido;
 import com.lucas.cursows.entities.Usuario;
 import com.lucas.cursows.entities.enums.StatusPedido;
+import com.lucas.cursows.repositories.CategoriaRepository;
 import com.lucas.cursows.repositories.PedidoRepository;
 import com.lucas.cursows.repositories.UsuarioRepository;
 
@@ -23,6 +26,9 @@ public class TesteConfig implements CommandLineRunner {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -37,6 +43,14 @@ public class TesteConfig implements CommandLineRunner {
 		Pedido o3 = new Pedido(0l, Instant.parse("2019-07-22T15:21:22Z"),StatusPedido.AGUARDANDO_PAGAMENTO, u1);
 		
 		pedidoRepository.saveAll(Arrays.asList(o1,o2,o3));
+		
+		Categoria cat1 = new Categoria(0l, "Electronics");
+		Categoria cat2 = new Categoria(0l,"Books");
+		Categoria cat3 = new Categoria(0l, "Computers");
+		
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
+		
+		
 	}
 	
 	

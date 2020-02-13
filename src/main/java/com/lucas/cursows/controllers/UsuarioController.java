@@ -19,7 +19,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@GetMapping
+	@GetMapping(value = "/buscarTodos")
 	public ResponseEntity<List<Usuario>> buscarTodos(){
 
 		List<Usuario> listaUsuarios = usuarioService.buscarTodos();
@@ -27,7 +27,7 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(listaUsuarios);		
 	}
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/buscarPorId/{id}")
 	public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id){
 		Usuario user = usuarioService.buscarPorId(id);
 		

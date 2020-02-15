@@ -49,17 +49,27 @@ public class TesteConfig implements CommandLineRunner {
 		
 		pedidoRepository.saveAll(Arrays.asList(o1,o2,o3));
 		
-		Categoria cat1 = new Categoria(0l, "Electronics");
-		Categoria cat2 = new Categoria(0l,"Books");
-		Categoria cat3 = new Categoria(0l, "Computers");
+		Categoria cat1 = new Categoria(null, "Electronics");
+		Categoria cat2 = new Categoria(null,"Books");
+		Categoria cat3 = new Categoria(null, "Computers");
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 		
-		Produto p1 = new Produto(0l, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
-		Produto p2 = new Produto(0l, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
-		Produto p3 = new Produto(0l, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
-		Produto p4 = new Produto(0l, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
-		Produto p5 = new Produto(0l, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+		Produto p1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Produto p2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Produto p3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Produto p4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Produto p5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+		
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2,cat3));		
+		produtoRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		
+		p1.getCategorias().add(cat2);
+		p2.getCategorias().add(cat3);
+		p2.getCategorias().add(cat2);
+		p3.getCategorias().add(cat3);
+		p4.getCategorias().add(cat3);
+		p5.getCategorias().add(cat2);
+		
 		
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		

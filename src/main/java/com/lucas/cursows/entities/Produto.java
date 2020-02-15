@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Produto implements Serializable{
@@ -16,15 +18,18 @@ public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
 	private String nome;
 	private String descricao;
 	private Double preco;
 	private String imgUrl;
-		
-	@Transient
-	private Set<Categoria> categorias = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "produto_categoria",
+    joinColumns = @JoinColumn(name = "id_produto", nullable = false ),
+    inverseJoinColumns = @JoinColumn(name = "id_categoria", nullable = false)
+    ) private Set<Categoria> categorias = new HashSet<>();
 	
 	public Produto() {
 		

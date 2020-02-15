@@ -26,7 +26,7 @@ public class Usuario implements Serializable   {
 	private String telefone;
 	private String senha;	
 	
-	@JsonIgnore // na relação 1 pra muitos deve utilizar o json ignore para que o jackson não conflita e entre num loop infinito
+	@JsonIgnore // nas relacoes de mao dupla deve utilizar o @jsonIgnore para que o jackson não conflita e entre num loop infinito
 	@OneToMany(mappedBy = "cliente")	
 	private List<Pedido> pedidos = new ArrayList<>();
 	

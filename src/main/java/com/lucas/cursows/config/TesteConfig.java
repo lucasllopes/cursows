@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.lucas.cursows.entities.Categoria;
 import com.lucas.cursows.entities.ItemPedido;
+import com.lucas.cursows.entities.Pagamento;
 import com.lucas.cursows.entities.Pedido;
 import com.lucas.cursows.entities.Produto;
 import com.lucas.cursows.entities.Usuario;
@@ -83,7 +84,11 @@ public class TesteConfig implements CommandLineRunner {
 		
 		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3,ip4));
 		
-		
+		Pagamento pg1 = new Pagamento(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPagamento(pg1); 		
+		pedidoRepository.save(o1); // nao e necessario criar um repository para classes dependentes e
+									 //que estao numa relacao 1 para 1, e possivel associar o objeto dependente ao objeto independente 
+									 // e utilizar seu repository para persistir os dados
 	}
 	
 	

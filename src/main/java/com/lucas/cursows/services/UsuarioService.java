@@ -23,6 +23,11 @@ public class UsuarioService  {
 		return objeto.get();
 	}
 	
+	public Usuario inserirUsuario(Usuario usuario) {
+		return usuarioRepository.save(usuario);
+		
+	}
+	
 	
 
 }

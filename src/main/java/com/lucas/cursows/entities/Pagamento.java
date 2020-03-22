@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Pagamento implements Serializable {
 	
@@ -21,8 +23,11 @@ public class Pagamento implements Serializable {
 	
 	private Instant dataPagamento;
 	
+	@JsonIgnore
 	@OneToOne
-	@MapsId //classe dependente
+	@MapsId //esta sendo mapeado pelo ID da classe Pedido 
+	//classe pedido é independente, um pedido pode existir sem um pagamento, 
+	//o pagamento so existe devido um pedido
 	private Pedido pedido;
 	
 	public Pagamento() {

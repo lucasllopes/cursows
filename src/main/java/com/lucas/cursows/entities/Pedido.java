@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.lucas.cursows.entities.enums.StatusPedido;
 
@@ -38,9 +39,16 @@ public class Pedido implements Serializable {
 	private Usuario cliente;
 	
 	@OneToMany(mappedBy = "id.pedido")
+	/*id e uma referencia para o atributo id da classe ItemPedido
+	 * OBS: esse id é do tipo ItemPedidoPk(classe auxiliar)
+	 * 
+	 * .pedido e um atributo da classe itemPedidoPk(classe auxiliar)
+	 * 
+	 * o @jsonIgnore esta no metodo getPedido da classe itemPedido
+	 */	
 	private Set<ItemPedido> itens = new HashSet<>();
 	
-	@OneToOne(mappedBy = "pedido",cascade = CascadeType.ALL) // o id do pedido e do pagamento sao identicos
+	@OneToOne(mappedBy = "pedido",cascade = CascadeType.ALL) // ambas os ids devem ser iguais
 	private Pagamento pagamento;
 	
 
@@ -109,6 +117,16 @@ public class Pedido implements Serializable {
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
 	}
+	
+	
+	public Double getTotal() {
+		double valor = 0;
+		for(ItemPedido p:itens) {
+			valor = valor + p.getSubTotal();			
+		}
+		return valor;	
+	}
+	
 
 	@Override
 	public int hashCode() {

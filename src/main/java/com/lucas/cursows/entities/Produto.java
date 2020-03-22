@@ -29,13 +29,17 @@ public class Produto implements Serializable{
 	private String imgUrl;
 
     @ManyToMany
-    @JoinTable(name = "produto_categoria",
-    joinColumns = @JoinColumn(name = "id_produto", nullable = false ),
-    inverseJoinColumns = @JoinColumn(name = "id_categoria", nullable = false)
+    @JoinTable(name = "produto_categoria", // criando tabela associativa
+    joinColumns = @JoinColumn(name = "id_produto", nullable = false ), // id da tabela produto
+    inverseJoinColumns = @JoinColumn(name = "id_categoria", nullable = false) // id da tabela categoria
     ) private Set<Categoria> categorias = new HashSet<>();
 
     
     @OneToMany(mappedBy = "id.produto")
+   /* Mesma ideia do mapeamento da classe pedido em relacao a classe ItemPedido
+    * porem, a  classe produto utiliza a classe itemPedido para retornar os pedidos em si,e nao os itemPedido.
+    * Essa particularidade e identificada no metodo getPedidos dessa classe.
+    */
     private Set<ItemPedido> itens = new HashSet<>(); 
     
 	public Produto() {

@@ -3,6 +3,8 @@ package com.lucas.cursows.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -45,17 +47,19 @@ public class UsuarioService  {
 	}
 	
 	public Usuario atualizarUsuario(Long id, Usuario usuario) {
+		try {
 		Usuario entidade = usuarioRepository.getOne(id); // getOne prepara o objeto de modo que fique monitorado pelo JPA
 													     //para voce manipula-lo e depois realizar alguma operacao no banco  
 		
 		atualizarDadosUsuario(entidade,usuario); // atualiza dados da entidade, baseado no usuario(parametro do metodo atualizarUsuario).
 												 // No final da execucao desse metodo, 
 		                                         //o atributo entidade esta atualizado com os dados do atributo usuario
-		
 		return usuarioRepository.save(entidade);
-		
-		
-		
+
+		}
+		catch (EntityNotFoundException e) {	
+	        throw new ResourceNotFoundException(id);
+			}
 	}
 
 	private void atualizarDadosUsuario(Usuario entidade, Usuario usuario) {

@@ -32,6 +32,28 @@ public class UsuarioService  {
 		usuarioRepository.deleteById(id);
 	}
 	
+	public Usuario atualizarUsuario(Long id, Usuario usuario) {
+		Usuario entidade = usuarioRepository.getOne(id); // getOne prepara o objeto de modo que fique monitorado pelo JPA
+													     //para voce manipula-lo e depois realizar alguma operacao no banco  
+		
+		atualizarDadosUsuario(entidade,usuario); // atualiza dados da entidade, baseado no usuario(parametro do metodo atualizarUsuario).
+												 // No final da execucao desse metodo, 
+		                                         //o atributo entidade esta atualizado com os dados do atributo usuario
+		
+		return usuarioRepository.save(entidade);
+		
+		
+		
+	}
+
+	private void atualizarDadosUsuario(Usuario entidade, Usuario usuario) {
+         entidade.setNome(usuario.getNome());
+         entidade.setEmail(usuario.getEmail());
+         entidade.setTelefone(usuario.getTelefone());
+		
+		
+	}
+	
 	
 
 }
